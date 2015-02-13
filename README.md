@@ -83,3 +83,33 @@ Your VestaCP user password, followed by [ENTER]:
 
 # Task List (TODOs)
  - [ ] Modularize `create-wordpress-site.sh` so that it can be used to deploy other PHP scripts other than WordPress
+
+ ** Scripts to implement **
+    - [ ] Simple Machines Forum (SMF)
+    - [ ] phpBB
+    - [ ] bbPress
+    - [ ] phpMyFAQ
+    - [ ] DokuWiki
+    - [ ] MediaWiki
+    - [ ] Tiki Wiki
+    - [ ] Geeklog
+    - [ ] Joomla
+    - [ ] Drupal
+    - [ ] SugarCRM
+    - [ ] Feng
+    - [ ] Magento
+    - [ ] Moodle
+    - [ ] LimeSurvey
+    - [ ] osTicket
+    - [ ] Gallery
+    - [ ] Coppermine
+    - [ ] Zenphoto
+    - [ ] Piwigo
+    - [ ] Mantis
+    - [ ] PHPProjekt
+    - [ ] Gregarius
+    - [ ] SimplePie
+    - [ ] Roundcube
+    - [ ] liveSite
+    - [ ] BasicPages
+    - [ ] concrete5
