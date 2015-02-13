@@ -14,7 +14,7 @@ if [ -z "$vst_hostname" ]; then
 fi
 ### Get Username
 if [ -z "$vst_username" ]; then
-  echo "Your VestCP username, followed by [ENTER]:"
+  echo "Your VestaCP username, followed by [ENTER]:"
   read vst_username
 fi
 ### Get Password
