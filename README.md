@@ -15,4 +15,4 @@ use VestaCP.
 Make sure you have met all the requirements specified above, including SSH Key based authentication.  
 
 ## Task List (TODOs)
- - Modularize `create-wordpress-site.sh` so that it can be used to deploy other PHP scripts other than WordPress
+ - [ ] Modularize `create-wordpress-site.sh` so that it can be used to deploy other PHP scripts other than WordPress
