@@ -27,7 +27,7 @@ if [ -z "$vst_newdomain" ]; then
   read vst_newdomain
 fi
 
-echo '[create-wordpress-site] Creating domain via API call'
+echo '[create-concrete5-site] Creating domain via API call'
 ## Execute API Call to create domain
 curl -s -X POST https://$vst_hostname:8083/api/ \
 -d user="$vst_username" \
@@ -38,7 +38,7 @@ curl -s -X POST https://$vst_hostname:8083/api/ \
 -d arg2="$vst_newdomain" \
 -d arg3="$vst_newdomain_ip"
 
-echo '[create-wordpress-site] Rebuilding the web configs via API call'
+echo '[create-concrete5-site] Rebuilding the web configs via API call'
 ## Execute API Call to rebuild web configs
 curl -s -X POST https://$vst_hostname:8083/api/ \
 -d user="$vst_username" \
@@ -49,24 +49,26 @@ curl -s -X POST https://$vst_hostname:8083/api/ \
 
 vst_newdomain_publichtml="~/web/$vst_newdomain/public_html"
 
-echo '[create-wordpress-site] Downloading WordPress latest.tar.gz'
-curl -s -O https://wordpress.org/latest.tar.gz
+c5_release=74619
 
-echo '[create-wordpress-site] Unpacking wordpress latest.tar.gz'
-tar -zxf latest.tar.gz
+echo '[create-concrete5-site] Downloading WordPress latest.tar.gz'
+curl -s -O http://www.concrete5.org/download_file/-/view/$c5_release
 
-echo "[create-wordpress-site] Uploading wordpress files to ~/web/$vst_newdomain/public_html"
-rsync -e ssh -azh wordpress/* $vst_username@$vst_hostname:$vst_newdomain_publichtml
+echo '[create-concrete5-site] Unpacking wordpress latest.tar.gz'
+tar -zxf $c5_release
+
+echo "[create-concrete5-site] Uploading wordpress files to ~/web/$vst_newdomain/public_html"
+rsync -e ssh -azh concrete5*/* $vst_username@$vst_hostname:$vst_newdomain_publichtml
 
 # Cleanup
-rm -rf latest.tar.gz wordpress
+rm -rf $c5_release concrete5*/
 
-echo "[create-wordpress-site] Removing $vst_newdomain_publichtml/index.html"
+echo "[create-concrete5-site] Removing $vst_newdomain_publichtml/index.html"
 ssh $vst_username@$vst_hostname "rm $vst_newdomain_publichtml/index.html"
 
-echo "[create-wordpress-site] Creating Database via API call"
+echo "[create-concrete5-site] Creating Database via API call"
 ## Generate DB Name
-mysql_db_name="wp_${vst_newdomain//./}"
+mysql_db_name="c5_${vst_newdomain//./}"
 ## Generate MySQL Username
 mysql_username=$vst_username"_"$mysql_db_name
 #### Shorten the MySQL username to make sure it's shorter than 16 chars (including the username)
@@ -86,13 +88,13 @@ curl -s -X POST https://$vst_hostname:8083/api/ \
 -d arg5="mysql"
 
 
-echo "[create-wordpress-site] ********************************************"
-echo "[create-wordpress-site] MySQL DB Credentials"
-echo "[create-wordpress-site] Database: $vst_username"_"$mysql_db_name"
-echo "[create-wordpress-site] Username: $vst_username"_"$mysql_username"
-echo "[create-wordpress-site] Password: $mysql_password"
-echo "[create-wordpress-site] ********************************************"
+echo "[create-concrete5-site] ********************************************"
+echo "[create-concrete5-site] MySQL DB Credentials"
+echo "[create-concrete5-site] Database: $vst_username"_"$mysql_db_name"
+echo "[create-concrete5-site] Username: $vst_username"_"$mysql_username"
+echo "[create-concrete5-site] Password: $mysql_password"
+echo "[create-concrete5-site] ********************************************"
 
-echo "[create-wordpress-site] Completed!"
-echo "[create-wordpress-site] You can now visit the website to finish the installation."
+echo "[create-concrete5-site] Completed!"
+echo "[create-concrete5-site] You can now visit the website to finish the installation."
 exit 0
